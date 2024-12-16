@@ -180,14 +180,8 @@ pipeline {
 		  /**
  		  * Install Veeam Ansible Collection
 		  */
-                  sh script: "ansible-galaxy collection install veeamhub.veeam"
-		  // ISCSI MAPPINGS AND MULTIPATH ENABLED FOR THE LINUX SERVERS
-		  sh script: "cd /vijayveeam/racsetup_copy/ansible; export ANSIBLE_COLLECTIONS_PATHS=/root/.ansible/collections; export ANSIBLE_ROLES_PATH=/root/.ansible/collections/ansible_collections/opitzconsulting/ansible_oracle/roles; export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6; ansible-playbook -i veeam-asm -e hostgroup=dbfs  playbooks/veeam_iscsi_setup.yml  --private-key "  + '${SSH_KEY}' + " --user ansible  -v"	
-		  // Joining FA to Domain	
-                  sh script: "ansible-playbook -i inventory.ini ../../ansible/playbooks/" +  "veeam-fa-domain.yml"
-
-		  // Creating FS and Exports on FA 	
-                  sh script: "ansible-playbook -i inventory.ini ../../ansible/playbooks/" +  "veeam-fa-nfs-export.yml"
+                  // Joining Windows to Domain	
+                  sh script: "ansible-playbook -i inventory.ini ../../ansible/playbooks/" +  "veeam-win-domain.yml" + " -e 'ansible_user=Administrator ansible_password=${WINDOWS_ADMIN_PASS} ansible_connection=winrm ansible_shell_type=cmd ansible_port=5985 ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore ansible_winrm_scheme=http ansible_winrm_kerberos_delegation=true'"
 			
 		  // Install Veeam setup 
                   sh script: "cat ${VEEAM_SERV_WSDIR}/hosts.ini" 
@@ -196,6 +190,16 @@ pipeline {
                   sh script: "cat inventory.ini"
 		
                	  sh script: "ansible-playbook -i inventory.ini ../../ansible/playbooks/" +  "veeam-install.yml" + " -e 'ansible_user=Administrator ansible_password=${WINDOWS_ADMIN_PASS} ansible_connection=winrm ansible_shell_type=cmd ansible_port=5985 ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore ansible_winrm_scheme=http ansible_winrm_kerberos_delegation=true'" 
+						
+                  sh script: "ansible-galaxy collection install veeamhub.veeam"
+		  // ISCSI MAPPINGS AND MULTIPATH ENABLED FOR THE LINUX SERVERS
+		  sh script: "cd /vijayveeam/racsetup_copy/ansible; export ANSIBLE_COLLECTIONS_PATHS=/root/.ansible/collections; export ANSIBLE_ROLES_PATH=/root/.ansible/collections/ansible_collections/opitzconsulting/ansible_oracle/roles; export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6; ansible-playbook -i veeam-asm -e hostgroup=dbfs  playbooks/veeam_iscsi_setup.yml  --private-key "  + '${SSH_KEY}' + " --user ansible  -v"	
+		  // Joining FA to Domain	
+                  sh script: "ansible-playbook -i inventory.ini ../../ansible/playbooks/" +  "veeam-fa-domain.yml"
+
+		  // Creating FS and Exports on FA 	
+                  sh script: "ansible-playbook -i inventory.ini ../../ansible/playbooks/" +  "veeam-fa-nfs-export.yml"
+					
 
 		
 
