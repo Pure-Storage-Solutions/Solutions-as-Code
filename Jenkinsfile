@@ -4,7 +4,7 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        choice(choices: ['MySql','MSSQL', 'Postgres', 'Oracle','spark-dev', 'Commvault', 'cyberark3', 'Oracle-demo','k8s', 'Oracle-rac', 'keerthi-ubuntu', 'data'], description: 'Select the Solution to build', name: 'solution')
+        choice(choices: ['MySql','MSSQL_Test','MSSQLDC_Test', 'Postgres', 'Oracle','spark-dev', 'Commvault', 'cyberark3', 'Oracle-demo','k8s', 'Oracle-rac', 'keerthi-ubuntu', 'data'], description: 'Select the Solution to build', name: 'solution')
         //choice(choices: ['cowriter','MySql','MSSQL', 'MSSQLDC', 'Postgres', 'Oracle','winjump','logrhythm','syslog','qradar','superna','superna-ubuntu', 'keerthi-ubuntu', 'util','k8s', 'Oracle-rac', 'splunk', 'superna-windows','superna-windows2','superna-windows3','superna-windows-19','akriti-ubuntu', 'linux-ubuntu', 'spark', 'cyberark', 'cyberark1', 'cyberark2', 'cyberark3', 'spark-dev', 'veeam-backup-and-replication','cyberark-pvwa', 'veeam'], description: 'Select the Solution to build', name: 'solution')
         string(name: 'count', defaultValue: "0", description: 'Number of VMs')
         choice(choices: ['fsvc', 'shared-vc'], description: 'Select the VC to use', name: 'vcenter')
@@ -153,6 +153,8 @@ pipeline {
             	println total_count
 		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	sh script: "python3 ../../build-inventory.py " + solname
+		echo "Inside Dir: ${pwd()}"
+		println " ------${solname}----- "
             	sh script: "cat hosts.ini"
 	   }
         }
@@ -160,9 +162,18 @@ pipeline {
 	    println "Installing and conifguring the solution"
             println solname
             println "------------------"
-            if (solname == 'MSSQLDC') {
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common-win.yml"
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml"
+            if (solname == 'MSSQLDC_Test') {
+		println "-----${solname}---"
+                // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common-win.yml"
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/mssqldc-install.yml -vvv"
+		// Joining Windows to Domain	
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "win-domain.yml -v"
+            } 
+	    if (solname == 'MSSQL_Test') {
+		println "-----${solname}---"
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/mssql-install.yml -vvv"
+		// Joining Windows to Domain	
+                // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "win-domain.yml -v"
             } 
             if  (solname == 'Oracle') {
                 sh script: "cd /root/COPY_OF_ORACLE_BUILD/ansible; export ANSIBLE_COLLECTIONS_PATHS=/root/.ansible/collections; export ANSIBLE_ROLES_PATH=/root/.ansible/collections/ansible_collections/opitzconsulting/ansible_oracle/roles; export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6; ansible-playbook -i inventory-asm-demo -e hostgroup=dbfs playbooks/single-instance-asm.yml --private-key "  + '${SSH_KEY}' + " --user ansible  -v"
@@ -238,7 +249,16 @@ pipeline {
         }
         if (params.Test) {
           	println "Executing Performance step"
-          	if  (solname == 'Veeam') {
+		
+		if (solname == 'MSSQLDC_Test') {
+		println "-----${solname}---"
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/mssqldc-test.yml -vvv"
+            	} 
+		else if (solname == 'MSSQL_Test') {
+		println "-----${solname}---"
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/mssql-test.yml -vvv"
+            	} 
+          	else if  (solname == 'Veeam') {
 			dir("${VEEAM_SERV_WSDIR}") {
 		          echo "current working directory: ${pwd()}"
                           sh script: "cat ${VEEAM_SERV_WSDIR}/hosts.ini" 
