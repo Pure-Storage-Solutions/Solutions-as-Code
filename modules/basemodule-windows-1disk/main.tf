@@ -59,17 +59,17 @@ data "vsphere_content_library_item" "my_ovf_item" {
   type       = "ovf"
   library_id = data.vsphere_content_library.my_content_library.id
 }
-resource "infoblox_ip_allocation" "alloc1" {
-  count = var.vm_count
-  network_view="default"
-  #cidr = var.network + "/" + var.netmask
-  ipv4_cidr = format("%s/%s",var.network,var.netmask)
+# resource "infoblox_ip_allocation" "alloc1" {
+#   count = var.vm_count
+#   network_view="default"
+#   #cidr = var.network + "/" + var.netmask
+#   ipv4_cidr = format("%s/%s",var.network,var.netmask)
                        
-  dns_view="INTERNAL" # may be commented out
-  fqdn=format("%s-%d.%s",var.vm_name,count.index +1,var.internal_domain)
-  enable_dns = "true"
-  comment = "Allocating an IPv4 address"
-}
+#   dns_view="INTERNAL" # may be commented out
+#   fqdn=format("%s-%d.%s",var.vm_name,count.index +1,var.internal_domain)
+#   enable_dns = "true"
+#   comment = "Allocating an IPv4 address"
+# }
 
 resource "vsphere_virtual_machine" "vm" {
   #depends_on = infoblox
