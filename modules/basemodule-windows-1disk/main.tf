@@ -122,7 +122,8 @@ resource "vsphere_virtual_machine" "vm" {
       }
       network_interface {
         
-        ipv4_address = infoblox_ip_allocation.alloc1[count.index].allocated_ipv4_addr
+        #ipv4_address = infoblox_ip_allocation.alloc1[count.index].allocated_ipv4_addr
+        ipv4_address = vm_ip[count.index]
         ipv4_netmask = var.netmask
       }
        ipv4_gateway    = var.gateway
