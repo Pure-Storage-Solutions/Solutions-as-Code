@@ -6,7 +6,7 @@ vsphere_password = ""
 osguest_id = "windows9Server64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "VLAN-2026"
-dns_servers = ["10.21.210.98"]
+dns_servers = ["10.21.93.16"]
 vm_cluster = "Metro Cluster2"
 dc = "SolutionsLab"
 
@@ -16,8 +16,8 @@ vm_gateway = "10.21.26.1"
 #vm 
 vm_count = "1"
 vm_name = "commcell"
-network = "10.21.24.0"
-netmask = "22"
+network = "10.21.26.0"
+netmask = "23"
 vm_ip = ["10.21.210.22"]
 vmware_os_template = "windows-server-2022-standard-core-v24.12"
 vm_cpus = 8
