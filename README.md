@@ -1,4 +1,4 @@
-  To use this solution, follow these steps in order:
+To use this solution, follow these steps in order:
 
 - Clone the repository
 - Navigate to the path for the solution (e.g. for MySQL, this path is "Solutions-as-Code/modules/MySql")
