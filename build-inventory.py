@@ -25,7 +25,7 @@ print(sol)
 
 
 
-if sol == 'MSSQL_Test':
+if sol == 'terraform-infra':
     print(sol)
     with open(filename,'w') as fh:
         fh.write("[win]\n")

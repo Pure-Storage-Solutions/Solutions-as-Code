@@ -4,7 +4,7 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        choice(choices: ['MSSQL_Test'], description: 'Select the Solution to build', name: 'solution')
+        choice(choices: ['terraform-infra'], description: 'Select the Solution to build', name: 'solution')
         string(name: 'count', defaultValue: "0", description: 'Number of VMs')
         choice(choices: ['fsvc', 'shared-vc'], description: 'Select the VC to use', name: 'vcenter')
         booleanParam(name: 'Build', defaultValue: false, description: 'Build Infrastructure')
@@ -98,19 +98,11 @@ def build_solution(sol) {
 }
 
 def install_solution(sol) {
-    if (sol == 'MSSQL_Test') {
-        sh "ansible-playbook -i hosts.ini ../../ansible/playbooks/mssql-install.yml -vvv"
-    } else {
-        echo "Installation not defined for solution: ${sol}"
-    }
+    sh "ansible-playbook -i hosts.ini ../../ansible/playbooks/mssql-install.yml -vvv"
 }
 
 def test_solution(sol) {
-    if (sol == 'MSSQL_Test') {
-        sh "ansible-playbook -i hosts.ini ../../ansible/playbooks/mssql-test.yml -vvv"
-    } else {
-        echo "Testing not defined for solution: ${sol}"
-    }
+    sh "ansible-playbook -i hosts.ini ../../ansible/playbooks/mssql-test.yml -vvv"
 }
 
 def destroy_solution(sol) {
