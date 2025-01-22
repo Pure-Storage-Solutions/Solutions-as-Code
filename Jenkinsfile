@@ -302,13 +302,21 @@ pipeline {
                   sh script: "${tf_cmd} init -reconfigure"
 	          sh script: "${tf_cmd} destroy -auto-approve -var-file=$vpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
                }
+               
+
+
             } else {
                 println "Executing Infrstructure destroy step" 
                 sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
                 sh script: "${tf_cmd} init -reconfigure"
 			    sh script: "${tf_cmd} destroy -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
-            }	
+            }
+			
         }
-	}
-  }
 
+	}
+	
+	
+	
+	
+  }
