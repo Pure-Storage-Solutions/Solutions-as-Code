@@ -1,0 +1,51 @@
+---
+
+- name: "INSTALL_SOFTWARE/PUSH_INSTALL_WINDOWS"
+  commvault.ansible.deployment.install_software:
+    webserver_hostname: "cvlt-anb1"
+    commcell_username: "admin"
+    commcell_password: "Winter@123"
+    os_type: "windows"
+    client_computers:
+      - cvanb-clt1
+    windows_packages:
+      - FILE_SYSTEM
+    username: "administrator"
+    password: "Winter@123"
+    client_group_name:
+      - Infrastructure
+    install_path: C:\Program Files\Commvault
+    sw_cache_client: "cvlt-anb1"
+    wait_for_job_completion: True
+
+- name: "Run a File System Backup for subclient"
+  commvault.ansible.file_servers.backup:
+    webserver_hostname: "cvlt-anb1"
+    commcell_username: "admin"
+    commcell_password: "Winter@123"
+    client: "cvanb-clt1"
+    backupset: "defaultBackupSet"
+    subclient: "test12"
+    backup_level : "incremental"
+    agent_type: "File System"
+  register: output_backupsubclient
+
+
+- name: "Wait for Job Completion and provide the Job Status"
+  commvault.ansible.job.status:
+    job_id: "{{output_backupsubclient.job_id | int}}"
+    wait_for_job_completion: True
+
+
+- name: "Run an In-Place File System Restore for subclient"
+  commvault.ansible.file_servers.restore:
+    webserver_hostname: "cvlt-anb1"
+    commcell_username: "admin"
+    commcell_password: "Winter@123"
+    client: "cvanb-clt1"
+    backupset: "defaultBackupSet"
+    subclient: "test12"
+    agent_type: "File System"
+    content: C:\Users\packer
+    in_place: "false"
+    destination_path: C:\Restore

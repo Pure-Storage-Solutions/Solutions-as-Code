@@ -1,0 +1,49 @@
+
+# OS disk + 1 200GB disk
+# admin / Winter@123
+# 1.  deploy_commserve.yml, subclient.yml, req.yml, commcell.yml
+
+# install comserv, add storage, create plan
+# install client, Get client properties and add subclient
+# backup
+# restapi -- code with api key
+
+---
+
+- name: Initialize additional disks 
+  win_initialize_disk:
+    disk_number: "{{ item }}"
+  with_items: 
+    - 1
+
+- name: Download CommServe installer
+  ansible.windows.win_copy:
+    src: /data/cvlt
+    dest: C:\Temp\
+
+- name: Install Commvault custom package silently using the answer file
+  win_command: |
+    C:\Temp\cvlt\WinX64\Setup.exe /silent /play "C:\Temp\cvlt\ans\install.xml"
+  args:
+    creates: C:\Program Files\Commvault
+
+- name: Creating disk storage
+  commvault.ansible.storage.disk.add:
+    webserver_hostname: "cvlt-anb1"
+    commcell_username: "admin"
+    commcell_password: "Winter@123"
+    name: "DISK_LIB1"
+    media_agent: "cvlt-anb1"
+    mount_path: D:\cvlt1\LIB
+    deduplication_db_path: D:\cvlt1\DDB
+
+
+- name: Creating a "Server" plan with 2 days RPO"
+  commvault.ansible.plans.add:
+    webserver_hostname: "cvlt-anb1"
+    commcell_username: "admin"
+    commcell_password: "Winter@123"
+    name: "pl_fs"
+    type: "Server"
+    storage_pool_name: "DISK_LIB1"
+    rpo_minutes: 2880
