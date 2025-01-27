@@ -69,6 +69,22 @@ if sol == 'MSSQL': #or 'MSSQLDC':
     with open(filename,'w') as fh:
         fh.write("[win]\n")
         for name in names:
+            fh.write(name.rstrip().split('.')[0]+ '.puretec.purestorage.com' + '\n')
+        fh.write("[win:vars]\n")
+        fh.write("ansible_user=administrator\n")
+        fh.write("ansible_password=VMware1!\n")
+        fh.write("ansible_connection=winrm\n")
+        fh.write("ansible_winrm_server_cert_validation=ignore\n")
+        fh.write("ansible_port=5985\n")
+        fh.write("ansible_winrm_scheme=http\n")
+        fh.write("ansible_winrm_kerberos_delegation=true\n")
+        fh.write("ansible_winrm_transport=kerberos\n")
+
+if sol == 'Commvault': #or 'MSSQLDC':
+    print(sol)
+    with open(filename,'w') as fh:
+        fh.write("[win]\n")
+        for name in names:
             fh.write(name.rstrip().split('.')[0]+ '.fslab.local' + '\n')
         fh.write("[win:vars]\n")
         # fh.write("ansible_user=administrator\n")
@@ -80,8 +96,7 @@ if sol == 'MSSQL': #or 'MSSQLDC':
         fh.write("ansible_port=5985\n")
         fh.write("ansible_winrm_scheme=http\n")
         fh.write("ansible_winrm_kerberos_delegation=true\n")
-        fh.write("ansible_winrm_transport=kerberos\n")
-        
+        fh.write("ansible_winrm_transport=kerberos\n") 
 else:
     with open(filename,'w') as fh:
         for ip in ips:
