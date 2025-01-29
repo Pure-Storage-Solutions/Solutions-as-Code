@@ -10,11 +10,11 @@
 
 ---
 
-# - name: Initialize additional disks 
-#   win_initialize_disk:
-#     disk_number: "{{ item }}"
-#   with_items: 
-#     - 1
+- name: Initialize additional disks 
+  win_initialize_disk:
+    disk_number: "{{ item }}"
+  with_items: 
+    - 1
 
 - name: Download CommServe installer
   ansible.windows.win_copy:
