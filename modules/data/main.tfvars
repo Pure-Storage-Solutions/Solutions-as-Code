@@ -28,7 +28,7 @@ os_disk_size = "100"
 data_disk_size = "1500"
 datastore_os = "Metrocluster-2-DS"
 datastore_data = "Metrocluster-2-DS"
-contentlib_name = "Shared-vCenter-ContentLib"
+contentlib_name = "SolutionsLab-ContentLib"
 
 
 
