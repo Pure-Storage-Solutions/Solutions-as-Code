@@ -8,7 +8,7 @@ internal_domain = "puretec.purestorage.com"
 vmSubnet = "VLAN-2026"
 dns_servers = ["10.21.93.16"]
 vm_cluster = "Metro Cluster2"
-dc = "SolutionsLab"
+dc = "Solutions-Lab"
 
 vm_gateway = "10.21.26.1"
 
@@ -19,7 +19,7 @@ vm_name = "commcell"
 network = "10.21.26.0"
 netmask = "23"
 vm_ip = ["10.21.26.6"]
-vmware_os_template = "windows-server-2022-standard-core-v24.12"
+vmware_os_template = "windows-server-2022-standard-core-v25.1"
 vm_cpus = 8
 vm_memory = 16384
 os_disk_size = "100"
