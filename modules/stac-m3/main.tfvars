@@ -5,7 +5,7 @@ vsphere_user = "administrator@vsphere.local"
 vsphere_password = ""
 
 #common
-osguest_id = "rhel8_64Guest"
+osguest_id = "rhel9_64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "VLAN-2026"
 dns_servers = ["10.21.93.16"]
