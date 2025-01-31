@@ -18,7 +18,7 @@ print(f"The ips are {ips} and the vms domain names are  {names} \n\n\n")
 filename = 'modules/' + sol +  '/hosts.ini'
 var_filename = 'hosts.yml'
 #filename = 'hosts.ini'
-print(filename)
+#print(filename)
 print(sol)
 # check if  the solution is windows
 # prepare the hosts.ini with more details to login 
@@ -236,14 +236,16 @@ if sol == 'Oracle':
     create_and_update_host_vars(ip_addresses=ips, domain_names=names)
 
 else:
+    print(sol)
+    print(filename)
     with open(filename,'w') as fh:
         for ip in ips:
             fh.write(ip.rstrip() + '\n')
 
-    with open(var_filename,'w') as fh:
-        fh.write('hg:' + '\n')
-        for ip in ips:
-            fh.write(' - ' + ip.rstrip() + '\n')
+    # with open(var_filename,'w') as fh:
+    #     fh.write('hg:' + '\n')
+    #     for ip in ips:
+    #         fh.write(' - ' + ip.rstrip() + '\n')
 
 
 #os.chdir(os.path.join(os.getcwd(), '..', '..', 'ansible')) 
