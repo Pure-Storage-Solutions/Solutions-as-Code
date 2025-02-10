@@ -5,7 +5,7 @@ vsphere_user = "administrator@vsphere.local"
 vsphere_password = ""
 
 #common
-osguest_id = "rhel9_64Guest"
+osguest_id = "ubuntu64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "VLAN-2026"
 dns_servers = ["10.21.93.16"]
@@ -21,7 +21,7 @@ vm_name = "stacm3"
 network = "10.21.26.0"
 netmask = "23"
 vm_ip = ["10.21.210.165"]
-vmware_os_template = "linux-rhel-9-v25.01"
+vmware_os_template = "linux-ubuntu-22.04lts-v25.01"
 vm_cpus = 16
 vm_memory = 16384
 os_disk_size = "100"
