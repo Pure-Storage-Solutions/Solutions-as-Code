@@ -16,7 +16,7 @@ vm_gateway = "10.21.26.1"
 
 
 #vm 
-vm_count = "3"
+vm_count = "4"
 vm_name = "stacm3"
 network = "10.21.26.0"
 netmask = "23"
