@@ -17,12 +17,12 @@ vm_gateway = "10.21.26.1"
 
 #vm 
 vm_count = "1"
-vm_name = "data-infra"
+vm_name = "ubuntu-linux-vm"
 network = "10.21.26.0"
 netmask = "23"
 vm_ip = ["10.21.26.8"]
 vmware_os_template = "linux-ubuntu-22.04lts-v25.01"
-vm_cpus = 16
+vm_cpus = 8
 vm_memory = 16384
 os_disk_size = "100"
 data_disk_size = "1500"
