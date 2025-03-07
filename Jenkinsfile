@@ -19,7 +19,7 @@ pipeline {
         stage('Build solution') {
             environment {
                 SSH_KEY = credentials('ansible')
-		WINDOWS_ADMIN_PASS = credentials('windows_admin_password')
+				WINDOWS_ADMIN_PASS = credentials('windows_admin_password')
                 VC_PASS = credentials("${params.vcenter}")
                 INFOBLOX_PASS = credentials('infoblox')
                 AWS_ACCESS_KEY_ID = 'PSFBSAZRAECJNHNFJEKCPOHOOPMGMKMJLIJLKBCMLB'
