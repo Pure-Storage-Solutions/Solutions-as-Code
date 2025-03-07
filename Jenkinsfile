@@ -23,7 +23,7 @@ pipeline {
                 VC_PASS = credentials("${params.vcenter}")
                 INFOBLOX_PASS = credentials('infoblox')
                 AWS_ACCESS_KEY_ID = 'PSFBSAZRAECJNHNFJEKCPOHOOPMGMKMJLIJLKBCMLB'
-                AWS_SECRET_ACCESS_KEY = credentials('s3token')
+                // AWS_SECRET_ACCESS_KEY = credentials('s3token')
                 ANSIBLE_HOST_KEY_CHECKING = "False"
                 ANSIBLE_ROLES_PATH = "../../ansible/roles"
                 vm_count = "${params.count}".toInteger()
