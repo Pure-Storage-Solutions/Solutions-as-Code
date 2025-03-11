@@ -161,13 +161,14 @@ resource "vsphere_virtual_machine" "vm" {
     script_path = "/home/ansible/tmp_resizefs.sh"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "set -x",
-      "chmod +x /home/ansible/*sh",
-      "sudo sh /home/ansible/resizefs.sh"
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "set -x",
+  #     "chmod +x /home/ansible/*sh",
+  #     "sudo sh /home/ansible/resizefs.sh"
+  #   ]
+  # }
+
 
   # provisioner "local-exec" {
   #   command = "ansible-playbook -i ${vsphere_virtual_machine.vm[count.index].default_ip_address}, --private-key ~/ansible.key --user ansible ../../ansible/playbooks/common.yml"
