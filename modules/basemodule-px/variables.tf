@@ -15,7 +15,6 @@ variable "vmware_os_template" {}
 variable "vm_cpus" {}
 variable "vm_memory" {}
 variable "cluster" {}
-variable "ip" {}
 variable "dns_servers" {
   type = list
 }
