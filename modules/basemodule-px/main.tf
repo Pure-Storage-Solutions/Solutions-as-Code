@@ -157,8 +157,8 @@ resource "vsphere_virtual_machine" "vm" {
     user     = "ansible"
     #private_key = file("/var/lib/jenkins/ansible.key")
     private_key = file(var.ansible_key)
-    #host     = self.default_ip_address
-    host = self.name
+    host     = self.default_ip_address
+    #host = self.name
     script_path = "/home/ansible/tmp_resizefs.sh"
   }
 
