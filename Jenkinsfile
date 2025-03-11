@@ -4,10 +4,10 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        choice(choices: ['MySql','MSSQL', 'Postgres', 'Oracle', 'stacm3', 'Commvault', 'cyberark3', 'Oracle-demo','k8s', 'Oracle-rac', 'keerthi-ubuntu', 'ubuntuvm'], description: 'Select the Solution to build', name: 'solution')
+        choice(choices: ['k8s', 'openshift'], description: 'Select the Solution to build', name: 'solution')
         //choice(choices: ['cowriter','MySql','MSSQL', 'MSSQLDC', 'Postgres', 'Oracle','winjump','logrhythm','syslog','qradar','superna','superna-ubuntu', 'keerthi-ubuntu', 'util','k8s', 'Oracle-rac', 'splunk', 'superna-windows','superna-windows2','superna-windows3','superna-windows-19','akriti-ubuntu', 'linux-ubuntu', 'spark', 'cyberark', 'cyberark1', 'cyberark2', 'cyberark3', 'spark-dev', 'veeam-backup-and-replication','cyberark-pvwa', 'veeam'], description: 'Select the Solution to build', name: 'solution')
         string(name: 'count', defaultValue: "0", description: 'Number of VMs')
-        choice(choices: ['fsvc', 'shared-vc'], description: 'Select the VC to use', name: 'vcenter')
+        choice(choices: ['shared-vc', 'fsvc'], description: 'Select the VC to use', name: 'vcenter')
         booleanParam(name: 'Build', defaultValue: false, description: 'Build Intrastructure')
         booleanParam(name: 'Install', defaultValue: false, description: 'Install and configure solution')
 	    booleanParam(name: 'Test', defaultValue: false, description: 'Run the performance test')
