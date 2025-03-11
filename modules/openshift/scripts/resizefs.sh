@@ -2,6 +2,7 @@
 
 # Determine the OS type
 OS=$(uname)
+ip ad del 10.21.26.20/23 dev ens192
 
 if [ "$OS" = "Linux" ]; then
     # Check Linux distribution from /etc/os-release
