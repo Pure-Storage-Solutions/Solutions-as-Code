@@ -16,11 +16,11 @@ vm_gateway = "10.21.26.1"
 
 
 #vm 
-vm_count = "4"
-vm_name = "openshift"
+vm_count = "1"
+vm_name = "openshifttest"
 network = "10.21.26.0"
 netmask = "23"
-vmware_os_template = "linux-ubuntu-22.04lts-v25.01"
+vmware_os_template = "linux-rhel-9-v25.03"
 vm_cpus = 8
 vm_memory = 32000
 os_disk_size = "160"
