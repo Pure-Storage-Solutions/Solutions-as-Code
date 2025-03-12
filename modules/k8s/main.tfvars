@@ -16,7 +16,7 @@ vm_gateway = "10.21.26.1"
 
 
 #vm 
-vm_count = "1"
+vm_count = "4"
 vm_name = "kube"
 network = "10.21.26.0"
 netmask = "23"
