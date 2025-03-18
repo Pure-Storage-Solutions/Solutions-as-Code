@@ -14,7 +14,6 @@ module "vm" {
     vm_memory                        = var.vm_memory
     dns_servers                      = var.dns_servers
     cluster                          = var.vm_cluster
-    ip                               = var.vm_ip
     data_disk_size                   = var.data_disk_size
     datastore_os                     = var.datastore_os
     datastore_data                   = var.datastore_data

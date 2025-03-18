@@ -35,10 +35,7 @@ variable "vmware_os_template" {}
 variable "vm_cpus" {}
 variable "vm_memory" {}
 variable "vm_cluster" {}
-variable "vm_ip" {
-  type = list
-  
-}
+
 
 variable "osguest_id" {}
 variable "data_disk_size" {
