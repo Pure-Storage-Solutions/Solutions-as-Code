@@ -26,6 +26,7 @@ pipeline {
                 // AWS_SECRET_ACCESS_KEY = credentials('s3token')
                 ANSIBLE_HOST_KEY_CHECKING = "False"
                 ANSIBLE_ROLES_PATH = "../../ansible/roles"
+                vm_count = "${params.count}".toInteger()
 
 		/** 
 		* Veeam backup & replication Setup 
