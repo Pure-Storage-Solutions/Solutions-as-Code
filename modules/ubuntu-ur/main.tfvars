@@ -20,7 +20,7 @@ vm_count = "1"
 vm_name = "ubuntu-ur"
 network = "10.21.26.0"
 netmask = "23"
-vmware_os_template = "linux-ubuntu-22.04lts-v25.03-new"
+vmware_os_template = "linux-ubuntu-22.04lts-v25.03"
 vm_cpus = 8
 vm_memory = 32000
 os_disk_size = "250"
@@ -28,6 +28,7 @@ data_disk_size = "150"
 datastore_os = "Datastore"
 datastore_data = "Datastore"
 contentlib_name = "Shared-vCenter-ContentLib"
+
 
 
 
