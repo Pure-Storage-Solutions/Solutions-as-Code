@@ -4,7 +4,7 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        choice(choices: ['k8s', 'ubuntu-ur'], description: 'Select the Solution to build', name: 'solution')
+        choice(choices: ['k8s', 'ubuntu-ur', 'unni-rhel'], description: 'Select the Solution to build', name: 'solution')
         string(name: 'count', defaultValue: "0", description: 'Number of VMs')
         choice(choices: ['shared-vc', 'fsvc'], description: 'Select the VC to use', name: 'vcenter')
         booleanParam(name: 'Build', defaultValue: false, description: 'Build Intrastructure')
