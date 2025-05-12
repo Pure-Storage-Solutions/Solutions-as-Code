@@ -8,7 +8,7 @@ vsphere_password = ""
 osguest_id = "rhel9_64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "VLAN-2026"
-dns_servers = ["10.21.210.98"]
+dns_servers = ["10.21.93.16"]
 vm_cluster = "vCenter-Shared-Cluster"
 dc = "SuperMicro"
 
